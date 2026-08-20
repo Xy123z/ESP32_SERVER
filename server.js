@@ -3,7 +3,7 @@ const readline = require('readline');
 
 const wss = new WebSocket.Server({ port: 8080 });
 console.log("Server listening on port 8080...");
-
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 wss.on('connection', (ws) => {
   console.log("Client connected. Sending WELCOME...");
   ws.send(JSON.stringify({ event: "WELCOME" }));
@@ -18,7 +18,6 @@ wss.on('connection', (ws) => {
 });
 
 function startCli(ws) {
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   rl.on('line', (line) => {
     const cmd = line.trim().toLowerCase();
     if (cmd === 'left' || cmd === 'right') {
