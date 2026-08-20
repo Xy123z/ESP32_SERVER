@@ -10,7 +10,7 @@ wss.on('connection', (ws) => {
   ws.on('message', (message) => {
     const data = JSON.parse(message);
     if (data.event === "ACK") {
-      console.log("ESP32 Acknowledged! Tell me howmany steps should I walk?):");
+      console.log("ESP32 Acknowledged! Tell me what should i do:");
       startCli(ws);
     }
   });
@@ -26,6 +26,6 @@ return {
 function startCli(ws) {
   rl.on('line', (line) => {
     const cmd = line.trim().toLowerCase();
-    JSON.stringify(tokenizer(com));
+    ws.send(JSON.stringify(tokenizer(cmd)));
   });
 }
