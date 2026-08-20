@@ -16,11 +16,12 @@ wss.on('connection', (ws) => {
   });
 });
 function tokenizer(input){
-const [action="",direction="",angle="0"] = input.split(/\s+\); 
+const [action="",direction="",angle="0",steps="0"] = input.split(" "); 
 return {
   action,
   direction,
-  angle: Number(angle) || 0
+  angle: Number(angle) || 0,
+  steps: Number(steps) || 0
 };                                                              
 }
 function startCli(ws) {
